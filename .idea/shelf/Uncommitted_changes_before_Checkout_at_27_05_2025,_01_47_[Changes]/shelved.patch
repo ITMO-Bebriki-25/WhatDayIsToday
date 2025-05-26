@@ -1,0 +1,62 @@
+Index: gateway/docker-compose.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>services:\n  postgres:\n    image: postgres\n    container_name: gateway\n    environment:\n      - POSTGRES_USER=postgres\n      - POSTGRES_PASSWORD=postgres\n      - POSTGRES_DB=gateway\n    restart: unless-stopped\n    ports:\n      - \"5432:5432\"\n    volumes:\n      - pg_data:/var/lib/postgresql/data\n\nvolumes:\n  pg_data:
+===================================================================
+diff --git a/gateway/docker-compose.yml b/gateway/docker-compose.yml
+--- a/gateway/docker-compose.yml	(revision 80613ddbb2e774bf94ba961c98288176b4afc6df)
++++ b/gateway/docker-compose.yml	(date 1748299416283)
+@@ -8,7 +8,7 @@
+       - POSTGRES_DB=gateway
+     restart: unless-stopped
+     ports:
+-      - "5432:5432"
++      - "9998:5432"
+     volumes:
+       - pg_data:/var/lib/postgresql/data
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"eb6198fd-4114-49e1-a363-36c91f71d5ae\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/gateway/src/main/java/org/bebriki/gateway/presentation/controllers/client/ClientController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/gateway/src/main/java/org/bebriki/gateway/presentation/controllers/client/ClientController.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"KubernetesApiPersistence\">{}</component>\n  <component name=\"KubernetesApiProvider\">{\n  &quot;isMigrated&quot;: true\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 1\n}</component>\n  <component name=\"ProjectId\" id=\"2xeBuugOP1mNujJuUbIb6ugjAc5\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"git-widget-placeholder\": \"gateway\",\n    \"last_opened_file_path\": \"/Users/misha/Desktop/ITMO/History/project/WhatDayIsToday\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"project.structure.last.edited\": \"Modules\",\n    \"project.structure.proportion\": \"0.0\",\n    \"project.structure.side.proportion\": \"0.0\",\n    \"settings.editor.selected.configurable\": \"preferences.lookFeel\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\n      <recent name=\"org.bebriki.gateway.configs.security\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"GatewayApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <module name=\"gateway\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.bebriki.gateway.GatewayApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"eb6198fd-4114-49e1-a363-36c91f71d5ae\" name=\"Changes\" comment=\"\" />\n      <created>1748288884401</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1748288884401</updated>\n      <workItem from=\"1748288885456\" duration=\"1199000\" />\n      <workItem from=\"1748290122002\" duration=\"8715000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n</project>
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 80613ddbb2e774bf94ba961c98288176b4afc6df)
++++ b/.idea/workspace.xml	(date 1748299533411)
+@@ -6,7 +6,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="eb6198fd-4114-49e1-a363-36c91f71d5ae" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/bebriki/gateway/presentation/controllers/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/bebriki/gateway/presentation/controllers/client/ClientController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gateway/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/docker-compose.yml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -47,7 +47,7 @@
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "RunOnceActivity.git.unshallow": "true",
+     "git-widget-placeholder": "gateway",
+-    "last_opened_file_path": "/Users/misha/Desktop/ITMO/History/project/WhatDayIsToday",
++    "last_opened_file_path": "/Users/misha/Desktop/ITMO/History/project/WhatDayIsToday/gateway/api",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -61,6 +61,9 @@
+   }
+ }]]></component>
+   <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/gateway/api" />
++    </key>
+     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+       <recent name="org.bebriki.gateway.configs.security" />
+     </key>
+@@ -82,7 +85,7 @@
+       <option name="presentableId" value="Default" />
+       <updated>1748288884401</updated>
+       <workItem from="1748288885456" duration="1199000" />
+-      <workItem from="1748290122002" duration="8715000" />
++      <workItem from="1748290122002" duration="9391000" />
+     </task>
+     <servers />
+   </component>
