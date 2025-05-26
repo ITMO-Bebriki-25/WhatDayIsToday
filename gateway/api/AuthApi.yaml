@@ -1,0 +1,68 @@
+openapi: "3.1.0"
+info:
+  title: "WhatDayIsToday API"
+  description: "WhatDayIsToday API"
+  version: "1.0.0"
+servers:
+  - url: "https://WhatDayIsToday"
+paths:
+  /api/v1/login:
+    post:
+      summary: "POST api/v1/login"
+      operationId: "login"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUserRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /api/v1/registration:
+    post:
+      summary: "POST api/v1/registration"
+      operationId: "register"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistrateUserRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+components:
+  schemas:
+    LoginUserRequest:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+          nullable: true
+        password:
+          type: "string"
+          nullable: true
+    RegistrateUserRequest:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+          nullable: true
+        password:
+          type: "string"
+          nullable: true
+        role:
+          type: "string"
+          nullable: true
+          enum:
+            - "ADMIN"
+            - "CLIENT"
