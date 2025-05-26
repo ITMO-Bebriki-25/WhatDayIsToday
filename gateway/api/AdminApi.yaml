@@ -1,0 +1,19 @@
+openapi: "3.1.0"
+info:
+  title: "WhatDayIsToday API"
+  description: "WhatDayIsToday API"
+  version: "1.0.0"
+servers:
+  - url: "https://WhatDayIsToday"
+paths:
+  /api/v1/avents:
+    get:
+      summary: "GET api/v1/avents"
+      operationId: "getAllEvents"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"

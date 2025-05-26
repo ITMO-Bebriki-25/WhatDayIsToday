@@ -5,9 +5,7 @@ import org.bebriki.gateway.application.events.dto.CreateEventDto;
 import org.bebriki.gateway.application.events.dto.EventDto;
 import org.bebriki.gateway.application.events.services.EventsService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.MonthDay;
 
@@ -18,23 +16,31 @@ public class ClientController {
     private final EventsService eventsService;
 
     @PostMapping("/events")
-    public ResponseEntity<?> createEvent(CreateEventDto createEventDto) {
+    public ResponseEntity<?> createEvent(@RequestBody CreateEventDto createEventDto) {
         return eventsService.createEvent(createEventDto);
     }
 
-    public ResponseEntity<?> updateEvent(EventDto eventDto) {
+    @PutMapping("/events")
+    public ResponseEntity<?> updateEvent(@RequestBody EventDto eventDto) {
         return eventsService.updateEvent(eventDto);
     }
 
-    public ResponseEntity<?> getEventById(long id) {
+    @GetMapping("/events/{id}")
+    public ResponseEntity<?> getEventById(@PathVariable("id") long id) {
         return eventsService.getEventById(id);
     }
 
-    public ResponseEntity<?> getEventByDate(MonthDay monthDay) {
+    @GetMapping("/events")
+    public ResponseEntity<?> getEventByDate(
+            @RequestParam("month") int month,
+            @RequestParam("day") int day)
+    {
+        MonthDay monthDay = MonthDay.of(month, day);
         return eventsService.getEventByDate(monthDay);
     }
 
-    public ResponseEntity<?> deleteEvent(long id) {
+    @DeleteMapping("/events/{id}")
+    public ResponseEntity<?> deleteEvent(@PathVariable("id") long id) {
         return eventsService.deleteEvent(id);
     }
 }

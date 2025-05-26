@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb6198fd-4114-49e1-a363-36c91f71d5ae" name="Changes" comment="" />
+    <list default="true" id="eb6198fd-4114-49e1-a363-36c91f71d5ae" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/bebriki/gateway/presentation/controllers/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/bebriki/gateway/presentation/controllers/client/ClientController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1748288884401</updated>
       <workItem from="1748288885456" duration="1199000" />
-      <workItem from="1748290122002" duration="8097000" />
+      <workItem from="1748290122002" duration="8715000" />
     </task>
     <servers />
   </component>
