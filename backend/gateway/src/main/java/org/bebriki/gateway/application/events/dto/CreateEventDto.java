@@ -11,7 +11,7 @@ import java.time.Year;
 public class CreateEventDto {
     private final String name;
     private final String description;
-    private final String source;
+    private final String sourceUrl;
     private final String imageUrl;
     private final Year eventYear;
     private final MonthDay eventDate;

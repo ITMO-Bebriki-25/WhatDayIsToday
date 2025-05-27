@@ -71,7 +71,7 @@ public class EventClientImpl implements EventClient{
 
     //GET api/v1/events?month=month&day=day
     @Override
-    public ResponseEntity<EventDto> getEventByDate(MonthDay monthDay) {
+    public ResponseEntity<List<EventDto>> getEventByDate(MonthDay monthDay) {
         int month = monthDay.getMonthValue();
         int day = monthDay.getDayOfMonth();
 
@@ -82,7 +82,7 @@ public class EventClientImpl implements EventClient{
                                 .queryParam("month", month)
                                 .queryParam("day", day)
                                 .build())
-                        .retrieve(), EventDto.class
+                        .retrieve(), new ParameterizedTypeReference<List<EventDto>>() {}
         );
     }
 
@@ -92,7 +92,7 @@ public class EventClientImpl implements EventClient{
         return proxyRestService.proxyRequest(
                 () -> restClient.delete()
                         .uri(builder -> builder
-                                .path("/events")
+                                .path("/events/{id}")
                                 .build(id))
                         .retrieve(), Void.class
         );

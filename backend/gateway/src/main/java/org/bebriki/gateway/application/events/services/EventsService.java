@@ -12,6 +12,6 @@ public interface EventsService {
     ResponseEntity<EventDto> updateEvent(EventDto eventDto);
     ResponseEntity<EventDto> getEventById(long id);
     ResponseEntity<List<EventDto>> getAllEvents();
-    ResponseEntity<EventDto> getEventByDate(MonthDay monthDay);
+    ResponseEntity<List<EventDto>> getEventByDate(MonthDay monthDay);
     ResponseEntity<Void> deleteEvent(long id);
 }

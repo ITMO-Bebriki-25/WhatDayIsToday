@@ -36,7 +36,7 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public ResponseEntity<EventDto> getEventByDate(MonthDay monthDay) {
+    public ResponseEntity<List<EventDto>> getEventByDate(MonthDay monthDay) {
         return eventClient.getEventByDate(monthDay);
     }
 
