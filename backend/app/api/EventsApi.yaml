@@ -1,0 +1,93 @@
+openapi: "3.1.0"
+info:
+  title: "WhatDayIsToday API"
+  description: "WhatDayIsToday API"
+  version: "1.0.0"
+servers:
+  - url: "https://WhatDayIsToday"
+paths:
+  /api/v1/events:
+    put:
+      summary: "PUT api/v1/events"
+      operationId: "update"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventDto"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EventDto"
+  /api/v1/events/{id}:
+    get:
+      summary: "GET api/v1/events/{id}"
+      operationId: "get"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EventDto"
+    delete:
+      summary: "DELETE api/v1/events/{id}"
+      operationId: "delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+components:
+  schemas:
+    Year:
+      type: "object"
+      properties: { }
+    MonthDay:
+      type: "object"
+      properties:
+        month:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    EventDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        description:
+          type: "string"
+          nullable: true
+        sourceUrl:
+          type: "string"
+          nullable: true
+        imageUrl:
+          type: "string"
+          nullable: true
+        eventYear:
+          nullable: true
+          $ref: "#/components/schemas/Year"
+        eventDate:
+          nullable: true
+          $ref: "#/components/schemas/MonthDay"

@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Делаем запрос с числовыми параметрами
     
-    fetch(`http://localhost:8081/api/v1/events?month=${monthNumber}&day=${day}`)
+    fetch(`http://localhost:8081/api/v1/events?month=${monthNumber}&day=${day}`, {
+           method: 'GET',
+        })
         .then(response => {
-            console.log(response.json())
             if (!response.ok) throw new Error('Ошибка сети');
             return response.json();
         })
