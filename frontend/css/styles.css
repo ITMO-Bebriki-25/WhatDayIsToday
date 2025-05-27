@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Основные переменные */
+:root {
+  --bg: #0f0f10;
+  --card-bg: #1f1f22;
+  --text: #e4e4e7;
+  --accent: #8e44ad;
+  --accent-hover: #732d91;
+  --input-bg: #2c2c2e;
+  --danger: #ff4d4d;
+  --radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+form {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.admin-container, .container {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.event-card {
+  background: var(--card-bg);
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+}
+
+.event-card img {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-top: 10px;
+}
+
+.login-container {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  text-align: center;
+  margin-top: 100px;
+}
+
+#login-error, .error-message {
+  color: var(--danger);
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+#current-date {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
