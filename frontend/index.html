@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
-<html>
 <head>
-    <title>Исторические события</title>
     <meta charset="UTF-8">
+    <title>Исторический календарь</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-        <div class="container">
-            <h1 id="current-date"></h1>
-            <div id="events-container"></div> 
+<div class="container">
+    <h1 id="current-date">Выберите дату</h1>
+    
+    <div class="date-controls">
+        <button class="nav-button prev-day">
+            <span class="arrow">←</span>
+            Предыдущий день
+        </button>
+        
+        <div class="date-picker-container">
+            <input type="text" id="date-picker" placeholder="Выберите дату" readonly>
         </div>
-    <script src="js/main.js"></script>
+        
+        <button class="nav-button next-day">
+            Следующий день
+            <span class="arrow">→</span>
+        </button>
+    </div>
+
+    <div class="quick-nav">
+        <button class="quick-nav-btn" data-days="-7">Неделю назад</button>
+        <button class="quick-nav-btn" data-days="-30">Месяц назад</button>
+        <button class="quick-nav-btn today">Сегодня</button>
+        <button class="quick-nav-btn" data-days="7">Через неделю</button>
+        <button class="quick-nav-btn" data-days="30">Через месяц</button>
+    </div>
+
+    <div id="calendar-container" class="calendar-wrapper"></div>
+    <div id="events-container"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
