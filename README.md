@@ -5,7 +5,7 @@
 ## Технологический стек
 
 ### Бэкенд
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Security
 - PostgreSQL
@@ -46,56 +46,6 @@ WhatDayIsToday/
 - Добавление новых администраторов
 - Просмотр всех событий
 
-## Установка и запуск
-
-### Предварительные требования
-- Java 17
-- Maven
-- PostgreSQL
-- Node.js (для запуска фронтенда)
-
-### Настройка базы данных
-1. Создайте базу данных PostgreSQL:
-```sql
-CREATE DATABASE gateway;
-```
-
-### Запуск бэкенда
-1. Перейдите в директорию backend:
-```bash
-cd backend
-```
-
-2. Соберите проект:
-```bash
-mvn clean install
-```
-
-3. Запустите микросервисы:
-```bash
-# Запуск сервиса событий
-java -jar app/target/app-0.0.1-SNAPSHOT.jar
-
-# Запуск gateway
-java -jar gateway/target/gateway-0.0.1-SNAPSHOT.jar
-```
-
-### Запуск фронтенда
-1. Перейдите в директорию frontend:
-```bash
-cd frontend
-```
-
-2. Установите http-server (если еще не установлен):
-```bash
-npm install -g http-server
-```
-
-3. Запустите сервер:
-```bash
-http-server -p 8000
-```
-
 ### Доступ к приложению
 - Фронтенд: http://localhost:8000
 - API Gateway: http://localhost:8081
@@ -119,7 +69,6 @@ http-server -p 8000
 - Реализована ролевая модель доступа (ADMIN)
 
 ## Разработчики
-- [Ваше имя]
-
-## Лицензия
-MIT License
+- Гаврилов М.Т
+- Москвин П.E
+- Чкареули Г.Т
