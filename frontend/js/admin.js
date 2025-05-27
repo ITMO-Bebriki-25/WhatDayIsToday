@@ -23,6 +23,24 @@ function logout() {
     window.location.href = 'login.html';
 }
 
+// Форматирование даты для отображения
+function formatDateForDisplay(monthDay, year) {
+    if (!monthDay) return '';
+    const [month, day] = monthDay.split('-').slice(2);
+    const months = [
+        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+        'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+    ];
+    return `${day} ${months[parseInt(month) - 1]} ${year}`;
+}
+
+// Преобразование MonthDay в формат yyyy-MM-dd
+function monthDayToFullDate(monthDay, year) {
+    if (!monthDay || !year) return '';
+    const [_, __, month, day] = monthDay.split('-');
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
+
 function showForm(action) {
     const formsSection = document.getElementById('forms-section');
     let formHTML = '';
@@ -43,7 +61,7 @@ function showForm(action) {
         case 'edit':
             formHTML = `
                 <form id="edit-form" onsubmit="handleEdit(event)">
-                    <select id="edit-select" name="id" required></select>
+                    <select id="edit-select" name="id" required onchange="fillEditForm(this.value)"></select>
                     <input type="date" name="eventDate" required>
                     <input type="text" name="name" placeholder="Название" required>
                     <input type="url" name="imageUrl" placeholder="Ссылка на изображение">
@@ -77,6 +95,23 @@ function showForm(action) {
     formsSection.innerHTML = formHTML;
 }
 
+// Заполнение формы редактирования данными выбранного события
+function fillEditForm(eventId) {
+    const event = allEvents.find(e => e.id === parseInt(eventId));
+    if (!event) return;
+
+    const form = document.getElementById('edit-form');
+    if (!form) return;
+
+    const fullDate = monthDayToFullDate(event.eventDate, event.eventYear);
+    
+    form.elements.eventDate.value = fullDate;
+    form.elements.name.value = event.name || '';
+    form.elements.imageUrl.value = event.imageUrl || '';
+    form.elements.sourceUrl.value = event.sourceUrl || '';
+    form.elements.description.value = event.description || '';
+}
+
 async function loadEventsForSelection(action) {
     try {
         const response = await fetch(API.baseUrl, { headers: API.headers });
@@ -86,8 +121,13 @@ async function loadEventsForSelection(action) {
 
         const select = document.getElementById(`${action}-select`);
         select.innerHTML = events.map(event =>
-            `<option value="${event.id}">${event.eventYear} - ${event.name}</option>`
+            `<option value="${event.id}">${formatDateForDisplay(event.eventDate, event.eventYear)} - ${event.name}</option>`
         ).join('');
+
+        // Автоматически заполняем форму при загрузке событий для редактирования
+        if (action === 'edit' && events.length > 0) {
+            fillEditForm(events[0].id);
+        }
     } catch (err) {
         alert('Не удалось загрузить список событий.');
         console.error(err);
@@ -124,6 +164,7 @@ async function handleAdd(e) {
 
         if (!response.ok) throw new Error(await response.text());
         alert('Событие добавлено успешно!');
+        e.target.reset();
     } catch (err) {
         alert('Ошибка при добавлении события: ' + err.message);
     }
@@ -153,6 +194,8 @@ async function handleEdit(e) {
 
         if (!response.ok) throw new Error(await response.text());
         alert('Событие обновлено!');
+        // Перезагружаем список событий после успешного обновления
+        loadEventsForSelection('edit');
     } catch (err) {
         alert('Ошибка при обновлении события: ' + err.message);
     }
@@ -170,6 +213,8 @@ async function handleDelete(e) {
 
         if (!response.ok) throw new Error(await response.text());
         alert('Событие удалено!');
+        // Перезагружаем список событий после успешного удаления
+        loadEventsForSelection('delete');
     } catch (err) {
         alert('Ошибка при удалении события: ' + err.message);
     }
@@ -195,6 +240,7 @@ async function handleAddAdmin(e) {
 
         if (!response.ok) throw new Error(await response.text());
         alert('Админ добавлен!');
+        e.target.reset();
     } catch (err) {
         alert('Ошибка при добавлении админа: ' + err.message);
     }
