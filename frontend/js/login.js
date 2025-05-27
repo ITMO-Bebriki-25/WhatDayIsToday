@@ -1,3 +1,5 @@
+// login.js — вход и сохранение токена
+
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -11,16 +13,19 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             body: JSON.stringify(data)
         });
 
-        if (response.ok) {
-            // Редирект на админку
-            window.location.href = 'admin.html';
-        } else {
-            // Ошибка входа
+        if (!response.ok) {
+            const errorText = await response.text();
+            document.getElementById('login-error').textContent = 'Ошибка входа: ' + errorText;
             document.getElementById('login-error').style.display = 'block';
+            return;
         }
+
+        const result = await response.json();
+        localStorage.setItem('token', result.token);
+        window.location.href = 'admin.html';
     } catch (error) {
-        console.error('Ошибка входа:', error);
         document.getElementById('login-error').textContent = 'Ошибка сервера. Попробуйте позже.';
         document.getElementById('login-error').style.display = 'block';
+        console.error('Ошибка входа:', error);
     }
 });

@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
-<html>
 <head>
-    <title>Админ-панель</title>
     <meta charset="UTF-8">
+    <title>Админ-панель</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="admin-container">
-        <h1>Управление событиями</h1>
-        
-        <div class="admin-actions">
-            <button onclick="showForm('add')">Добавить событие</button>
-            <button onclick="showForm('edit')">Редактировать событие</button>
-            <button onclick="showForm('delete')">Удалить событие</button>
-            <button onclick="showForm('add_admin')">Добавить админа</button>
-        </div>
+<div class="admin-container">
+    <h1>Управление событиями</h1>
 
-        <!-- Формы для действий -->
-        <div id="forms-section"></div>
-        
-        <!-- Список событий для выбора -->
-        <div id="events-list"></div>
+    <div class="admin-actions">
+        <button onclick="showForm('add')">Добавить событие</button>
+        <button onclick="showForm('edit')">Редактировать событие</button>
+        <button onclick="showForm('delete')">Удалить событие</button>
+        <button onclick="showForm('add_admin')">Добавить админа</button>
+        <button onclick="logout()">Выйти</button>
     </div>
-    <script src="js/admin.js"></script>
+
+    <div id="forms-section"></div>
+    <div id="events-list"></div>
+</div>
+
+<script src="js/admin.js"></script>
 </body>
 </html>
