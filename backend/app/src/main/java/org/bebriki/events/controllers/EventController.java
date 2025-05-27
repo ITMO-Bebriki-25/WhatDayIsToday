@@ -25,8 +25,8 @@ public class EventController {
         return eventService.findById(id);
     }
 
-    @GetMapping("/")
-    public Iterable<EventDto> getByDate(@RequestParam int month, @RequestParam int day) {
+    @GetMapping(params = {"month", "day"})
+    public Iterable<EventDto> getByDate(@RequestParam("month") int month, @RequestParam("day") int day) {
         MonthDay monthDay = MonthDay.of(Month.of(month), day);
         return eventService.findByMonthDay(monthDay);
     }

@@ -1,14 +1,14 @@
 services:
   postgres:
     image: postgres
-    container_name: gateway
+    container_name: events
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=gateway
+      - POSTGRES_DB=events
     restart: unless-stopped
     ports:
-      - "9998:5432"
+      - "9999:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
 

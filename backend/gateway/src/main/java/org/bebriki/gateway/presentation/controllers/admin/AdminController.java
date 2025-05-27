@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
     private final EventsService eventsService;
 
-    @GetMapping("/avents")
+    @GetMapping("/events")
     public ResponseEntity<?> getAllEvents() {
        return eventsService.getAllEvents();
     }

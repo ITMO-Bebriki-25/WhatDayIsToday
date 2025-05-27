@@ -5,6 +5,7 @@ import org.bebriki.gateway.application.events.dto.CreateEventDto;
 import org.bebriki.gateway.application.events.dto.EventDto;
 import org.bebriki.gateway.application.events.services.EventsService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.MonthDay;
@@ -16,11 +17,13 @@ public class ClientController {
     private final EventsService eventsService;
 
     @PostMapping("/events")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createEvent(@RequestBody CreateEventDto createEventDto) {
         return eventsService.createEvent(createEventDto);
     }
 
     @PutMapping("/events")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateEvent(@RequestBody EventDto eventDto) {
         return eventsService.updateEvent(eventDto);
     }
@@ -30,7 +33,7 @@ public class ClientController {
         return eventsService.getEventById(id);
     }
 
-    @GetMapping("/events")
+    @GetMapping(value = "/events", params = {"month", "day"})
     public ResponseEntity<?> getEventByDate(
             @RequestParam("month") int month,
             @RequestParam("day") int day)
@@ -40,6 +43,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/events/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteEvent(@PathVariable("id") long id) {
         return eventsService.deleteEvent(id);
     }
