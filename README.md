@@ -47,8 +47,8 @@ WhatDayIsToday/
 - Просмотр всех событий
 
 ### Доступ к приложению
-- Фронтенд админская панель: http://89.104.71.156:8000/login.html
-- Фронтенд: http://89.104.71.156:8000/
+- Фронтенд админская панель: http://whatdateistoday.ru/admin
+- Фронтенд: http://whatdateistoday.ru/
 
 ## API Endpoints
 
