@@ -4,8 +4,11 @@ let allEvents = [];
 
 const config = {
     baseUrl: 'http://89.104.71.156:8000/api/v1',
-    headers: {
-        'Content-Type': 'application/json'
+    get headers() {
+        return {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
     }
 };
 
