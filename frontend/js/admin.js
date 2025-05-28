@@ -3,7 +3,7 @@
 let allEvents = [];
 
 const config = {
-    baseUrl: 'http://89.104.71.156:8000/api/v1',
+    baseUrl: '/api/v1',
     get headers() {
         return {
             'Content-Type': 'application/json',
@@ -14,11 +14,15 @@ const config = {
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-    if (!token) window.location.href = 'login.html';
+    const expiry = Date.parse(localStorage.getItem('tokenExpires'));
+    if (!token || expiry < Date.now()) {
+        logout();
+    }
 });
 
 function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('tokenExpires');
     window.location.href = 'login.html';
 }
 
@@ -102,9 +106,7 @@ function fillEditForm(eventId) {
     const form = document.getElementById('edit-form');
     if (!form) return;
 
-    const fullDate = monthDayToFullDate(event.eventDate, event.eventYear);
-    
-    form.elements.eventDate.value = fullDate;
+    form.elements.eventDate.value = monthDayToFullDate(event.eventDate, event.eventYear);
     form.elements.name.value = event.name || '';
     form.elements.imageUrl.value = event.imageUrl || '';
     form.elements.sourceUrl.value = event.sourceUrl || '';
@@ -134,7 +136,7 @@ async function loadEventsForSelection(action) {
 }
 
 function formatMonthDay(dateStr) {
-    const [year, month, day] = dateStr.split('-');
+    const [__, month, day] = dateStr.split('-');
     return `--${month}-${day}`;
 }
 
@@ -143,7 +145,7 @@ async function handleAdd(e) {
     const formData = new FormData(e.target);
     const rawData = Object.fromEntries(formData.entries());
 
-    const [year, month, day] = rawData.eventDate.split('-');
+    const [year, _, __] = rawData.eventDate.split('-');
 
     const data = {
         name: rawData.name,
