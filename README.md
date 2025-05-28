@@ -47,9 +47,8 @@ WhatDayIsToday/
 - Просмотр всех событий
 
 ### Доступ к приложению
-- Фронтенд: http://localhost:8000
-- API Gateway: http://localhost:8081
-- Сервис событий: http://localhost:8080
+- Фронтенд админская панель: http://89.104.71.156:8000/login.html
+- Фронтенд: http://89.104.71.156:8000/
 
 ## API Endpoints
 
