@@ -2,16 +2,23 @@ package org.bebriki.events.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.time.MonthDay;
 import java.time.Year;
 
-@Data
 @Entity
+@Table(name = "events")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -30,6 +37,12 @@ public class EventEntity {
 
     @Column(nullable = false)
     private MonthDay eventDate;
+
+    @Column(nullable = false)
+    private int month;
+
+    @Column(nullable = false)
+    private int day;
 
 //
 //

@@ -2,14 +2,13 @@
 
 let allEvents = [];
 
-const API = {
-    baseUrl: 'http://localhost:8081/api/v1/events',
+const config = {
+    baseUrl: 'http://89.104.71.156:8000/api/v1',
     get headers() {
-        const token = localStorage.getItem('token');
         return {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        };
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
     }
 };
 
@@ -114,7 +113,7 @@ function fillEditForm(eventId) {
 
 async function loadEventsForSelection(action) {
     try {
-        const response = await fetch(API.baseUrl, { headers: API.headers });
+        const response = await fetch(`${config.baseUrl}/events`, { headers: config.headers });
         if (!response.ok) throw new Error('Ошибка загрузки событий');
         const events = await response.json();
         allEvents = events;
@@ -156,9 +155,9 @@ async function handleAdd(e) {
     };
 
     try {
-        const response = await fetch(API.baseUrl, {
+        const response = await fetch(`${config.baseUrl}/events`, {
             method: 'POST',
-            headers: API.headers,
+            headers: config.headers,
             body: JSON.stringify(data)
         });
 
@@ -186,9 +185,9 @@ async function handleEdit(e) {
     };
 
     try {
-        const response = await fetch(API.baseUrl, {
+        const response = await fetch(`${config.baseUrl}/events`, {
             method: 'PUT',
-            headers: API.headers,
+            headers: config.headers,
             body: JSON.stringify(data)
         });
 
@@ -206,9 +205,9 @@ async function handleDelete(e) {
     const id = new FormData(e.target).get('id');
 
     try {
-        const response = await fetch(`${API.baseUrl}/${id}`, {
+        const response = await fetch(`${config.baseUrl}/events/${id}`, {
             method: 'DELETE',
-            headers: API.headers
+            headers: config.headers
         });
 
         if (!response.ok) throw new Error(await response.text());
@@ -232,9 +231,9 @@ async function handleAddAdmin(e) {
     };
 
     try {
-        const response = await fetch('http://localhost:8081/api/v1/registration', {
+        const response = await fetch(`${config.baseUrl}/registration`, {
             method: 'POST',
-            headers: API.headers,
+            headers: config.headers,
             body: JSON.stringify(data)
         });
 
