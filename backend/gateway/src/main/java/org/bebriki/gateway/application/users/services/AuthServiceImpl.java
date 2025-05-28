@@ -2,6 +2,7 @@ package org.bebriki.gateway.application.users.services;
 
 import lombok.RequiredArgsConstructor;
 import org.bebriki.gateway.application.users.contracts.AuthService;
+import org.bebriki.gateway.utils.jwt.TokenDto;
 import org.bebriki.gateway.application.users.exceptions.UserCreateException;
 import org.bebriki.gateway.infrastructure.users.entities.UserEntity;
 import org.bebriki.gateway.infrastructure.users.repositories.UserRepository;
@@ -36,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String loginUser(UserEntity user) throws BadCredentialsException {
+    public TokenDto loginUser(UserEntity user) throws BadCredentialsException {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getLogin(),

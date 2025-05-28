@@ -9,6 +9,7 @@ import org.bebriki.gateway.presentation.dto.login.LoginUserResponse;
 import org.bebriki.gateway.presentation.dto.login.mappers.LoginUserRequestMapper;
 import org.bebriki.gateway.presentation.dto.registration.RegistrateUserRequest;
 import org.bebriki.gateway.presentation.dto.registration.mappers.RegistrateUserRequestMapper;
+import org.bebriki.gateway.utils.jwt.TokenDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,16 +29,16 @@ public class AuthUserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUserRequest loginRequest) {
-        String token;
+        TokenDto tokenDto;
 
         try {
-            token = authService.loginUser(loginUserRequestMapper.fromRequest(loginRequest));
+            tokenDto = authService.loginUser(loginUserRequestMapper.fromRequest(loginRequest));
         }
         catch (BadCredentialsException exception) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
         }
 
-        return ResponseEntity.ok(new LoginUserResponse(token));
+        return ResponseEntity.ok(new LoginUserResponse(tokenDto.token(), tokenDto.expires()));
     }
 
     @PostMapping("/registration")
@@ -52,6 +53,6 @@ public class AuthUserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Registration successful: %s", user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Registration successful. Login: %s", user.getLogin()));
     }
 }

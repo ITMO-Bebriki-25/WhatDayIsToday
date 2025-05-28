@@ -23,7 +23,7 @@ public class JwtTokenUtils {
     @Value("${jwt.lifetime}")
     private Duration lifetime;
 
-    public String generateToken(UserDetails userDetails) {
+    public TokenDto generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
         List<String> roles = userDetails.getAuthorities().stream()
@@ -35,13 +35,14 @@ public class JwtTokenUtils {
 
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
 
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(issuedDate)
                 .expiration(expiredDate)
                 .claims(claims)
                 .signWith(key)
                 .compact();
+        return new TokenDto(token, expiredDate);
     }
 
     public String getUsernameFromToken(String token) {
