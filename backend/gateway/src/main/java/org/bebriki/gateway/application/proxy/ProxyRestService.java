@@ -16,7 +16,10 @@ public class ProxyRestService {
             Supplier<RestClient.ResponseSpec> requestSpec,
             Class<T> responseType) {
         try {
-            return requestSpec.get().toEntity(responseType);
+            ResponseEntity<T> response = requestSpec.get().toEntity(responseType);
+            return ResponseEntity
+                    .status(response.getStatusCode())
+                    .body(response.getBody());
         } catch (RestClientResponseException ex) {
             return ResponseEntity
                     .status(ex.getStatusCode())
@@ -28,7 +31,10 @@ public class ProxyRestService {
             Supplier<RestClient.ResponseSpec> requestSpec,
             ParameterizedTypeReference<T> responseType) {
         try {
-            return requestSpec.get().toEntity(responseType);
+            ResponseEntity<T> response = requestSpec.get().toEntity(responseType);
+            return ResponseEntity
+                    .status(response.getStatusCode())
+                    .body(response.getBody());
         } catch (RestClientResponseException ex) {
             return ResponseEntity
                     .status(ex.getStatusCode())

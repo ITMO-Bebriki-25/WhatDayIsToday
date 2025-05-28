@@ -3,7 +3,7 @@
 let allEvents = [];
 
 const API = {
-    baseUrl: 'http://localhost:8081/api/v1/events',
+    baseUrl: 'http://localhost:8000/api/v1',
     get headers() {
         const token = localStorage.getItem('token');
         return {
@@ -114,7 +114,7 @@ function fillEditForm(eventId) {
 
 async function loadEventsForSelection(action) {
     try {
-        const response = await fetch(API.baseUrl, { headers: API.headers });
+        const response = await fetch(`${API.baseUrl}/events`, { headers: API.headers });
         if (!response.ok) throw new Error('Ошибка загрузки событий');
         const events = await response.json();
         allEvents = events;
@@ -156,7 +156,7 @@ async function handleAdd(e) {
     };
 
     try {
-        const response = await fetch(API.baseUrl, {
+        const response = await fetch(`${API.baseUrl}/events`, {
             method: 'POST',
             headers: API.headers,
             body: JSON.stringify(data)
@@ -186,7 +186,7 @@ async function handleEdit(e) {
     };
 
     try {
-        const response = await fetch(API.baseUrl, {
+        const response = await fetch(`${API.baseUrl}/events`, {
             method: 'PUT',
             headers: API.headers,
             body: JSON.stringify(data)
@@ -206,7 +206,7 @@ async function handleDelete(e) {
     const id = new FormData(e.target).get('id');
 
     try {
-        const response = await fetch(`${API.baseUrl}/${id}`, {
+        const response = await fetch(`${API.baseUrl}/events/${id}`, {
             method: 'DELETE',
             headers: API.headers
         });
@@ -232,7 +232,7 @@ async function handleAddAdmin(e) {
     };
 
     try {
-        const response = await fetch('http://localhost:8081/api/v1/registration', {
+        const response = await fetch(`${API.baseUrl}/registration`, {
             method: 'POST',
             headers: API.headers,
             body: JSON.stringify(data)

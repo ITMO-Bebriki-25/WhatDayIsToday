@@ -1,5 +1,12 @@
 // login.js — вход и сохранение токена
 
+const API = {
+    baseUrl: 'http://localhost:8000/api/v1',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+};
+
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -7,9 +14,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch('http://localhost:8081/api/v1/login', {
+        const response = await fetch(`${API.baseUrl}/login`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: API.headers,
             body: JSON.stringify(data)
         });
 
