@@ -31,6 +31,11 @@ services:
     build: 
       context: ./backend/app
       dockerfile: Dockerfile
+      args:
+        - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     depends_on:
       postgres:
         condition: service_healthy
@@ -49,6 +54,11 @@ services:
     build:
       context: ./backend/gateway
       dockerfile: Dockerfile
+      args:
+        - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     depends_on:
       - postgres
       - app
