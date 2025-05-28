@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const month = date.getMonth() + 1; // JavaScript months are 0-based
         const day = date.getDate();
         
-        fetch(`http://89.104.71.156:8000/api/v1/events?month=${month}&day=${day}`)
+        fetch(`/api/v1/events?month=${month}&day=${day}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -1,7 +1,7 @@
 // login.js — вход и сохранение токена
 
 const config = {
-    baseUrl: 'http://89.104.71.156:8000/api/v1',
+    baseUrl: '/api/v1',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -29,6 +29,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
         const result = await response.json();
         localStorage.setItem('token', result.token);
+        localStorage.setItem('tokenExpires', result.expires);
         window.location.href = 'admin.html';
     } catch (error) {
         document.getElementById('login-error').textContent = 'Ошибка сервера. Попробуйте позже.';

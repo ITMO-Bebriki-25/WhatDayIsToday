@@ -1,8 +1,6 @@
 package org.bebriki.gateway.presentation.dto.login;
 
-import lombok.Data;
+import java.util.Date;
 
-@Data
-public class LoginUserResponse {
-    private final String token;
+public record LoginUserResponse(String token, Date expires) {
 }

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class LoginUserRequestMapper {
     public UserEntity fromRequest(LoginUserRequest loginUserRequest) {
         return UserEntity.builder()
-                .login(loginUserRequest.getUsername())
-                .password(loginUserRequest.getPassword())
+                .login(loginUserRequest.username())
+                .password(loginUserRequest.password())
                 .build();
     }
 }
