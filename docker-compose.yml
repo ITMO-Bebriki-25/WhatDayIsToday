@@ -35,7 +35,7 @@ services:
     env_file:
       - .env
     expose:
-      - "${SERVER_PORT}"
+      - "${SERVICE_PORT}"
     networks:
       - backend
       - database
