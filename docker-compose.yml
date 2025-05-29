@@ -12,10 +12,6 @@ services:
     image: postgres:latest
     env_file:
       - .env
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -30,24 +26,14 @@ services:
 
   app:
     container_name: app
-    build: 
+    build:
       context: ./backend/app
       dockerfile: Dockerfile
-      args:
-        - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
     depends_on:
       postgres:
         condition: service_healthy
     env_file:
       - .env
-    environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
-      SERVER_PORT: ${SERVER_PORT}
     expose:
       - "${SERVER_PORT}"
     networks:
@@ -59,24 +45,11 @@ services:
     build:
       context: ./backend/gateway
       dockerfile: Dockerfile
-      args:
-        - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
     depends_on:
       - postgres
       - app
     env_file:
       - .env
-    environment:
-      APP_SERVICE_URL: http://app:${SERVER_PORT}/api/v1
-      SERVER_PORT: ${GATEWAY_PORT}
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      JWT_LIFETIME: ${JWT_LIFETIME}
     expose:
       - "${GATEWAY_PORT}"
     networks:
