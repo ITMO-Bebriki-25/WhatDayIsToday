@@ -26,31 +26,15 @@ public class EventEntity {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "source_url")
     private String sourceUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "image_url")
     private String imageUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "event_year")
     private Year eventYear;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "event_date")
     private MonthDay eventDate;
-
-    @Column(nullable = false)
-    private int month;
-
-    @Column(nullable = false)
-    private int day;
-
-//
-//
-//    @ManyToMany
-//    @JoinTable(
-//            name = "pet_friends",
-//            joinColumns = @JoinColumn(name = "pet_id"),
-//            inverseJoinColumns = @JoinColumn(name = "friend_id")
-//    )
-//    private Collection<PetEntity> friends = new HashSet<>();
 }
