@@ -12,8 +12,8 @@ CREATE USER "${user_login}" WITH PASSWORD '${user_password}';
 
 GRANT CONNECT ON DATABASE "${POSTGRES_DB}" TO "${user_login}";
 GRANT USAGE ON SCHEMA public TO "${user_login}";
-GRANT SELECT, INSERT, UPDATE, DELETE ON "${POSTGRES_DB}".events TO "${user_login}";
-GRANT SELECT, INSERT, UPDATE, DELETE ON "${POSTGRES_DB}".users TO "${user_login}";
+GRANT SELECT, INSERT, UPDATE, DELETE ON events TO "${user_login}";
+GRANT SELECT, INSERT, UPDATE, DELETE ON users TO "${user_login}";
 
 
 CREATE INDEX idx_users_login ON users(login);
